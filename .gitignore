@@ -32,3 +32,8 @@ build/
 
 ### VS Code ###
 .vscode/
+src/main/java/io/javabrains/DataStaxAstraProperties.java
+
+### Astra ###
+connect.zip
+
