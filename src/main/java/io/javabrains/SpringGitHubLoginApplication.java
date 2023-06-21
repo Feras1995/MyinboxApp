@@ -1,21 +1,17 @@
 package io.javabrains;
-
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.cassandra.CqlSessionBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.datastax.oss.driver.api.core.uuid.Uuids;
 
+import io.javabrains.inbox.email.Email;
+import io.javabrains.inbox.email.EmailRepository;
 import io.javabrains.inbox.emailslist.EmailListItem;
 import io.javabrains.inbox.emailslist.EmailListItemRepository;
 import io.javabrains.inbox.emailslist.EmailsListPrimaryKey;
@@ -29,6 +25,8 @@ public class SpringGitHubLoginApplication {
 	FolderRepository folderRepository;
 	@Autowired
 	EmailListItemRepository emailsListRepository;
+	@Autowired
+	EmailRepository emailRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringGitHubLoginApplication.class, args);
@@ -47,19 +45,25 @@ public class SpringGitHubLoginApplication {
 		folderRepository.save(new Folder("Feras1995", "important", "yellow"));
 
 		for (int i = 0; i <10; i++) {
-
 			EmailsListPrimaryKey key = new EmailsListPrimaryKey();
 			key.setUserId("Feras1995");
 			key.setLabel("Inbox");
 			key.setTimeId(Uuids.timeBased());
-
 			EmailListItem emailsListEntry = new EmailListItem();
 			emailsListEntry.setId(key);
 			emailsListEntry.setSubject("Hello " + i);
-			emailsListEntry.setRead(false);
-			emailsListEntry.setTo(Arrays.asList("Feras1995"));
-
+			emailsListEntry.setUnread(true);
+			emailsListEntry.setTo(Arrays.asList("Feras1995","abc","efj"));
 			emailsListRepository.save(emailsListEntry);
+
+			Email email=new Email();
+			email.setId(key.getTimeId());
+			email.setFrom("Feras1995");
+			email.setSubject(emailsListEntry.getSubject());
+			email.setBody("body"+i);
+			email.setTo(emailsListEntry.getTo());
+
+			emailRepository.save(email);
 		}
 
 	}

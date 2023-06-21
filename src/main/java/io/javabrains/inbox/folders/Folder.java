@@ -1,7 +1,4 @@
 package io.javabrains.inbox.folders;
-
-import java.util.UUID;
-
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.cql.Ordering;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;

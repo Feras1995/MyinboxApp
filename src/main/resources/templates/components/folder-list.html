@@ -16,7 +16,7 @@
                   "
                 th:each="folder : ${folders}">
   
-                  <span th:text="${folder.label}">Folder</span>
+                  <a th:href="@{'/?folder='+ ${folder.label}}" th:text="${folder.label}">Folder</a>
                   
               </a>
             </div>
