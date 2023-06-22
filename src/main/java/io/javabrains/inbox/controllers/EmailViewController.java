@@ -1,11 +1,11 @@
 package io.javabrains.inbox.controllers;
 
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.ocpsoft.prettytime.PrettyTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -15,12 +15,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.datastax.oss.driver.api.core.uuid.Uuids;
+
 
 import io.javabrains.inbox.email.Email;
 import io.javabrains.inbox.email.EmailRepository;
-import io.javabrains.inbox.emailslist.EmailListItem;
-import io.javabrains.inbox.emailslist.EmailListItemRepository;
+
 import io.javabrains.inbox.folders.Folder;
 import io.javabrains.inbox.folders.FolderRepository;
 import io.javabrains.inbox.folders.FoldersService;
